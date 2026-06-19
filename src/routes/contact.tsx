@@ -149,6 +149,7 @@ function Contact() {
 
 function InfoCard({ icon: Icon, title, lines, href }: { icon: any; title: string; lines: string[]; href?: string }) {
   const external = href?.startsWith("http");
+  const isWa = href?.includes("wa.me");
   const inner = (
     <div className="flex items-start gap-4 rounded-2xl border border-border bg-card p-5 hover-lift">
       <div className="grid place-items-center size-11 rounded-xl bg-primary/10 text-primary shrink-0">
@@ -161,7 +162,12 @@ function InfoCard({ icon: Icon, title, lines, href }: { icon: any; title: string
     </div>
   );
   return href ? (
-    <a href={href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined}>
+    <a
+      href={href}
+      onClick={isWa ? handleExternalClick(href!) : undefined}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+    >
       {inner}
     </a>
   ) : inner;

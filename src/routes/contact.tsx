@@ -5,6 +5,8 @@ import { SiteLayout } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { services } from "@/lib/services-data";
 import { EMAIL, PHONE_DISPLAY, WHATSAPP_NUMBER } from "@/components/site/FloatingActions";
+import { openExternal, handleExternalClick } from "@/lib/open-external";
+import teamImg from "@/assets/team.jpg";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -30,8 +32,12 @@ function Contact() {
   return (
     <SiteLayout>
       {/* HERO */}
-      <section className="bg-hero">
-        <div className="container-x py-20 md:py-28 max-w-3xl">
+      <section className="relative overflow-hidden bg-hero">
+        <div className="absolute inset-y-0 right-0 hidden lg:block w-1/2 pointer-events-none">
+          <img src={teamImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover opacity-30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
+        </div>
+        <div className="container-x relative py-20 md:py-28 max-w-3xl">
           <Reveal>
             <p className="text-sm font-semibold text-primary uppercase tracking-wider">Contact us</p>
           </Reveal>
@@ -127,8 +133,9 @@ function Contact() {
             </div>
             <a
               href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("URGENT: I need emergency pest control assistance.")}`}
+              onClick={handleExternalClick(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("URGENT: I need emergency pest control assistance.")}`)}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="magnetic-btn inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-6 py-3.5 text-sm font-semibold"
             >
               Message Emergency Line <ArrowRight className="size-4" />
@@ -198,7 +205,7 @@ function ContactForm() {
 
   const sendWhatsApp = () => {
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildBody())}`;
-    window.open(url, "_blank", "noopener,noreferrer");
+    openExternal(url);
     setDone(true);
   };
 
@@ -339,7 +346,7 @@ function InspectionForm() {
       `Please confirm an available slot for a free on-site inspection.`,
     ].join("\n");
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(body)}`;
-    window.open(url, "_blank", "noopener,noreferrer");
+    openExternal(url);
     setDone(true);
   };
 

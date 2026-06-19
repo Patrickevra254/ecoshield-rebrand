@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
+import { handleExternalClick } from "@/lib/open-external";
 
 export const WHATSAPP_NUMBER = "2348135133910";
 export const PHONE_DISPLAY = "0813 513 3910";
@@ -13,12 +14,15 @@ export function FloatingActions() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}`;
+
   return (
     <div className="fixed bottom-5 right-5 z-40 flex flex-col gap-3">
       <a
-        href={`https://wa.me/${WHATSAPP_NUMBER}`}
+        href={waUrl}
+        onClick={handleExternalClick(waUrl)}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
         className="magnetic-btn grid place-items-center size-14 rounded-full bg-[#25D366] text-white shadow-elegant"
       >

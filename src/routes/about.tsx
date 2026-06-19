@@ -47,7 +47,11 @@ function About() {
     <SiteLayout>
       {/* HERO */}
       <section className="relative overflow-hidden bg-hero">
-        <div className="container-x py-20 md:py-28 max-w-3xl">
+        <div className="absolute inset-y-0 right-0 hidden lg:block w-1/2 pointer-events-none">
+          <img src={ecoImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover opacity-35" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-transparent" />
+        </div>
+        <div className="container-x relative py-20 md:py-28 max-w-3xl">
           <Reveal>
             <p className="text-sm font-semibold text-primary uppercase tracking-wider">About EcoShield</p>
           </Reveal>

@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, Mail, MapPin, Phone, Clock, MessageCircle, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Clock, MessageCircle, AlertTriangle, CheckCircle2, User, Building2 } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { services } from "@/lib/services-data";
+import { EMAIL, PHONE_DISPLAY, WHATSAPP_NUMBER } from "@/components/site/FloatingActions";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -52,9 +53,8 @@ function Contact() {
       <section className="container-x py-16 grid lg:grid-cols-[1fr_1.2fr] gap-10 items-start">
         <Reveal>
           <div className="space-y-4">
-            <InfoCard icon={Phone} title="Phone" lines={["+234 800 000 0000"]} href="tel:+2348000000000" />
-            <InfoCard icon={Mail} title="Email" lines={["hello@ecoshield.co"]} href="mailto:hello@ecoshield.co" />
-            <InfoCard icon={MessageCircle} title="WhatsApp" lines={["+234 800 000 0000"]} href="https://wa.me/2348000000000" />
+            <InfoCard icon={MessageCircle} title="WhatsApp" lines={[PHONE_DISPLAY]} href={`https://wa.me/${WHATSAPP_NUMBER}`} />
+            <InfoCard icon={Mail} title="Email" lines={[EMAIL]} href={`mailto:${EMAIL}`} />
             <InfoCard icon={MapPin} title="Office" lines={["12 Hygiene Avenue,", "Victoria Island, Lagos"]} />
             <InfoCard icon={Clock} title="Hours" lines={["Mon — Sat: 8:00 — 18:00", "Sun: Emergency only"]} />
           </div>
@@ -122,11 +122,16 @@ function Contact() {
               </div>
               <div>
                 <h3 className="text-2xl font-bold tracking-tight text-white">Urgent pest control?</h3>
-                <p className="mt-2 text-white/70">Our emergency line is open 24/7 for active infestations and biohazards.</p>
+                <p className="mt-2 text-white/70">Our emergency line is open 24/7 on WhatsApp for active infestations and biohazards.</p>
               </div>
             </div>
-            <a href="tel:+2348000000000" className="magnetic-btn inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-6 py-3.5 text-sm font-semibold">
-              Call Emergency Line <ArrowRight className="size-4" />
+            <a
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("URGENT: I need emergency pest control assistance.")}`}
+              target="_blank"
+              rel="noreferrer"
+              className="magnetic-btn inline-flex items-center gap-2 rounded-full bg-lime text-lime-foreground px-6 py-3.5 text-sm font-semibold"
+            >
+              Message Emergency Line <ArrowRight className="size-4" />
             </a>
           </div>
         </Reveal>
@@ -136,6 +141,7 @@ function Contact() {
 }
 
 function InfoCard({ icon: Icon, title, lines, href }: { icon: any; title: string; lines: string[]; href?: string }) {
+  const external = href?.startsWith("http");
   const inner = (
     <div className="flex items-start gap-4 rounded-2xl border border-border bg-card p-5 hover-lift">
       <div className="grid place-items-center size-11 rounded-xl bg-primary/10 text-primary shrink-0">
@@ -147,79 +153,229 @@ function InfoCard({ icon: Icon, title, lines, href }: { icon: any; title: string
       </div>
     </div>
   );
-  return href ? <a href={href}>{inner}</a> : inner;
+  return href ? (
+    <a href={href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined}>
+      {inner}
+    </a>
+  ) : inner;
 }
+
+type ClientType = "individual" | "company";
 
 function ContactForm() {
   const [done, setDone] = useState(false);
+  const [clientType, setClientType] = useState<ClientType>("individual");
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    role: "",
+    service: "",
+    message: "",
+  });
+
+  const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+    setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  const buildBody = () => {
+    const serviceLabel = services.find((s) => s.slug === form.service)?.title ?? form.service;
+    const lines = [
+      `*New enquiry — EcoShield Website*`,
+      ``,
+      `*Client type:* ${clientType === "individual" ? "Individual" : "Company / Organisation"}`,
+      `*Name:* ${form.name}`,
+      ...(clientType === "company" ? [`*Company:* ${form.company}`, `*Role:* ${form.role || "—"}`] : []),
+      `*Email:* ${form.email}`,
+      `*Phone:* ${form.phone || "—"}`,
+      `*Service:* ${serviceLabel || "—"}`,
+      ``,
+      `*Message:*`,
+      form.message,
+    ];
+    return lines.join("\n");
+  };
+
+  const sendWhatsApp = () => {
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildBody())}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+    setDone(true);
+  };
+
+  const sendEmail = () => {
+    const subject = `New enquiry from ${form.name}${clientType === "company" && form.company ? ` (${form.company})` : ""}`;
+    const url = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildBody().replace(/\*/g, ""))}`;
+    window.location.href = url;
+    setDone(true);
+  };
+
+  const valid = form.name && form.email && form.message && form.service && (clientType === "individual" || form.company);
+
   if (done) {
     return (
       <div className="rounded-[2rem] border border-border bg-card p-10 text-center">
         <div className="mx-auto grid place-items-center size-14 rounded-full bg-primary text-primary-foreground">
           <CheckCircle2 className="size-7" />
         </div>
-        <h3 className="mt-5 text-2xl font-bold">Message received</h3>
-        <p className="mt-2 text-muted-foreground">Thanks — our team will be in touch within 1 business hour.</p>
+        <h3 className="mt-5 text-2xl font-bold">Message on its way</h3>
+        <p className="mt-2 text-muted-foreground">We've opened your messaging app — just hit send and we'll respond within 1 business hour.</p>
+        <button onClick={() => setDone(false)} className="mt-5 text-sm font-semibold text-primary underline-offset-4 hover:underline">
+          Send another message
+        </button>
       </div>
     );
   }
+
   return (
     <form
-      onSubmit={(e) => { e.preventDefault(); setDone(true); }}
+      onSubmit={(e) => { e.preventDefault(); if (valid) sendWhatsApp(); }}
       className="rounded-[2rem] border border-border bg-card p-7 md:p-9 space-y-5"
     >
+      {/* Client type toggle */}
+      <div>
+        <label className="text-sm font-medium">I'm enquiring as</label>
+        <div className="mt-2 grid grid-cols-2 gap-2 rounded-2xl bg-secondary p-1">
+          <TypeButton active={clientType === "individual"} onClick={() => setClientType("individual")} icon={User} label="Individual" />
+          <TypeButton active={clientType === "company"} onClick={() => setClientType("company")} icon={Building2} label="Company / Organisation" />
+        </div>
+      </div>
+
       <div className="grid sm:grid-cols-2 gap-4">
-        <Field label="Full name" name="name" required />
-        <Field label="Email" name="email" type="email" required />
+        <Field label="Full name" name="name" required value={form.name} onChange={update("name")} />
+        <Field label="Email" name="email" type="email" required value={form.email} onChange={update("email")} />
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
-        <Field label="Phone" name="phone" />
-        <Field label="Company (optional)" name="company" />
+        <Field label="Phone" name="phone" value={form.phone} onChange={update("phone")} />
+        {clientType === "company" ? (
+          <Field label="Company / Organisation" name="company" required value={form.company} onChange={update("company")} />
+        ) : (
+          <Field label="City (optional)" name="city" value={form.company} onChange={update("company")} />
+        )}
       </div>
+      {clientType === "company" && (
+        <Field label="Your role (optional)" name="role" value={form.role} onChange={update("role")} />
+      )}
       <div>
         <label className="text-sm font-medium">Service required</label>
-        <select required name="service" className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
+        <select
+          required
+          name="service"
+          value={form.service}
+          onChange={update("service")}
+          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+        >
           <option value="">Select a service</option>
           {services.map((s) => <option key={s.slug} value={s.slug}>{s.title}</option>)}
         </select>
       </div>
       <div>
         <label className="text-sm font-medium">Message</label>
-        <textarea required name="message" rows={5} className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none" placeholder="Tell us a bit about your space and needs..." />
+        <textarea
+          required
+          name="message"
+          rows={5}
+          value={form.message}
+          onChange={update("message")}
+          className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+          placeholder={clientType === "company" ? "Tell us about your facility, scope and frequency..." : "Tell us a bit about your space and needs..."}
+        />
       </div>
-      <button type="submit" className="magnetic-btn inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3.5 text-sm font-semibold shadow-elegant">
-        Send message <ArrowRight className="size-4" />
-      </button>
+
+      <div className="flex flex-col sm:flex-row gap-3 pt-1">
+        <button
+          type="submit"
+          disabled={!valid}
+          className="magnetic-btn inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] text-white px-6 py-3.5 text-sm font-semibold shadow-elegant disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <MessageCircle className="size-4" /> Send via WhatsApp
+        </button>
+        <button
+          type="button"
+          onClick={sendEmail}
+          disabled={!valid}
+          className="magnetic-btn inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3.5 text-sm font-semibold shadow-elegant disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <Mail className="size-4" /> Send via Email
+        </button>
+      </div>
+      <p className="text-xs text-muted-foreground">
+        Both options open your messaging app pre-filled with your details — review and send.
+      </p>
     </form>
+  );
+}
+
+function TypeButton({ active, onClick, icon: Icon, label }: { active: boolean; onClick: () => void; icon: any; label: string }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all ${
+        active ? "bg-background shadow-soft text-foreground" : "text-muted-foreground hover:text-foreground"
+      }`}
+    >
+      <Icon className="size-4" />
+      {label}
+    </button>
   );
 }
 
 function InspectionForm() {
   const [done, setDone] = useState(false);
+  const [form, setForm] = useState({ name: "", phone: "", city: "", date: "" });
+  const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
+    setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const body = [
+      `*Inspection booking request — EcoShield Website*`,
+      ``,
+      `*Name:* ${form.name}`,
+      `*Phone:* ${form.phone}`,
+      `*City:* ${form.city || "—"}`,
+      `*Preferred date:* ${form.date || "—"}`,
+      ``,
+      `Please confirm an available slot for a free on-site inspection.`,
+    ].join("\n");
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(body)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+    setDone(true);
+  };
+
   if (done) {
     return (
       <div className="rounded-2xl bg-secondary/50 p-8 text-center">
         <CheckCircle2 className="size-10 mx-auto text-primary" />
-        <p className="mt-3 font-semibold">Inspection request received.</p>
+        <p className="mt-3 font-semibold">Inspection request opened in WhatsApp — hit send to confirm.</p>
       </div>
     );
   }
   return (
-    <form onSubmit={(e) => { e.preventDefault(); setDone(true); }} className="grid sm:grid-cols-2 gap-4">
-      <Field label="Name" name="iname" required />
-      <Field label="Phone" name="iphone" required />
-      <Field label="City" name="icity" />
-      <Field label="Preferred date" name="idate" type="date" />
+    <form onSubmit={submit} className="grid sm:grid-cols-2 gap-4">
+      <Field label="Name" name="iname" required value={form.name} onChange={update("name")} />
+      <Field label="Phone" name="iphone" required value={form.phone} onChange={update("phone")} />
+      <Field label="City" name="icity" value={form.city} onChange={update("city")} />
+      <Field label="Preferred date" name="idate" type="date" value={form.date} onChange={update("date")} />
       <div className="sm:col-span-2">
-        <button type="submit" className="magnetic-btn w-full inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3.5 text-sm font-semibold shadow-elegant">
-          Book inspection <ArrowRight className="size-4" />
+        <button type="submit" className="magnetic-btn w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] text-white px-6 py-3.5 text-sm font-semibold shadow-elegant">
+          <MessageCircle className="size-4" /> Book via WhatsApp <ArrowRight className="size-4" />
         </button>
       </div>
     </form>
   );
 }
 
-function Field({ label, name, type = "text", required }: { label: string; name: string; type?: string; required?: boolean }) {
+function Field({
+  label, name, type = "text", required, value, onChange,
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  required?: boolean;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) {
   return (
     <div>
       <label htmlFor={name} className="text-sm font-medium">{label}</label>
@@ -228,6 +384,8 @@ function Field({ label, name, type = "text", required }: { label: string; name: 
         name={name}
         type={type}
         required={required}
+        value={value}
+        onChange={onChange}
         className="mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
       />
     </div>

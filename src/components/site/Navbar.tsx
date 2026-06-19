@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Leaf, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logo from "@/assets/ecoshield-logo.png.asset.json";
 
 const links = [
   { to: "/", label: "Home" },
@@ -32,13 +33,14 @@ export function Navbar() {
             scrolled ? "glass shadow-soft" : "bg-transparent"
           }`}
         >
-          <Link to="/" className="flex items-center gap-2 group">
-            <span className="grid place-items-center size-9 rounded-xl bg-primary text-primary-foreground shadow-elegant transition-transform group-hover:rotate-12">
-              <Leaf className="size-5" />
-            </span>
-            <span className="font-bold tracking-tight text-lg">
-              Eco<span className="text-primary">Shield</span>
-            </span>
+          <Link to="/" className="flex items-center gap-2 group" aria-label="EcoShield home">
+            <img
+              src={logo.url}
+              alt="EcoShield Cleaning Services and Pest Control"
+              className="h-10 md:h-11 w-auto object-contain transition-transform group-hover:scale-[1.03]"
+              width={180}
+              height={44}
+            />
           </Link>
 
           <div className="hidden md:flex items-center gap-1">

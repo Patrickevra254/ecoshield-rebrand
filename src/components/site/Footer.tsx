@@ -1,17 +1,20 @@
 import { Link } from "@tanstack/react-router";
-import { Leaf, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, MapPin, MessageCircle } from "lucide-react";
+import logo from "@/assets/ecoshield-logo.png.asset.json";
+import { EMAIL, PHONE_DISPLAY, WHATSAPP_NUMBER } from "./FloatingActions";
 
 export function Footer() {
   return (
     <footer className="bg-dark mt-24">
       <div className="container-x py-16 grid gap-12 md:grid-cols-4">
         <div className="md:col-span-2 max-w-md">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="grid place-items-center size-9 rounded-xl bg-lime text-lime-foreground">
-              <Leaf className="size-5" />
-            </span>
-            <span className="font-bold tracking-tight text-lg text-white">
-              EcoShield
+          <Link to="/" className="inline-flex items-center" aria-label="EcoShield home">
+            <span className="inline-block rounded-2xl bg-white p-3 shadow-soft">
+              <img
+                src={logo.url}
+                alt="EcoShield Cleaning Services and Pest Control"
+                className="h-12 w-auto object-contain"
+              />
             </span>
           </Link>
           <p className="mt-4 text-sm text-white/70 leading-relaxed">
@@ -30,8 +33,16 @@ export function Footer() {
         <div>
           <h4 className="text-white font-semibold mb-4">Contact</h4>
           <ul className="space-y-3 text-sm text-white/70">
-            <li className="flex items-center gap-2"><Phone className="size-4 text-lime" /> +234 800 000 0000</li>
-            <li className="flex items-center gap-2"><Mail className="size-4 text-lime" /> hello@ecoshield.co</li>
+            <li>
+              <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-lime transition-colors">
+                <MessageCircle className="size-4 text-lime" /> WhatsApp {PHONE_DISPLAY}
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${EMAIL}`} className="flex items-center gap-2 hover:text-lime transition-colors">
+                <Mail className="size-4 text-lime" /> {EMAIL}
+              </a>
+            </li>
             <li className="flex items-start gap-2"><MapPin className="size-4 text-lime mt-0.5" /> Lagos, Nigeria</li>
           </ul>
         </div>

@@ -85,10 +85,10 @@ function Home() {
   return (
     <SiteLayout>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-hero">
+      <section className="relative overflow-hidden bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 text-white">
         <div className="absolute inset-0 -z-10">
-          <div className="absolute -top-32 -left-32 size-[480px] bg-primary/20 blur-3xl animate-blob" />
-          <div className="absolute top-40 -right-32 size-[420px] bg-lime/30 blur-3xl animate-blob delay-300" />
+          <div className="absolute -top-32 -left-32 size-[480px] bg-emerald-500/20 blur-3xl animate-blob" />
+          <div className="absolute top-40 -right-32 size-[420px] bg-lime-400/20 blur-3xl animate-blob delay-300" />
         </div>
         <div className="container-x pt-12 md:pt-20 pb-20 grid lg:grid-cols-2 gap-12 items-center">
           <div>

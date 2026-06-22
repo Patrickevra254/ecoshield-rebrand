@@ -85,27 +85,27 @@ function Home() {
   return (
     <SiteLayout>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 text-white">
+      <section className="relative overflow-hidden bg-hero">
         <div className="absolute inset-0 -z-10">
-          <div className="absolute -top-32 -left-32 size-[480px] bg-emerald-500/20 blur-3xl animate-blob" />
-          <div className="absolute top-40 -right-32 size-[420px] bg-lime-400/20 blur-3xl animate-blob delay-300" />
+          <div className="absolute -top-32 -left-32 size-[480px] bg-primary/20 blur-3xl animate-blob" />
+          <div className="absolute top-40 -right-32 size-[420px] bg-lime/30 blur-3xl animate-blob delay-300" />
         </div>
         <div className="container-x pt-12 md:pt-20 pb-20 grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-medium text-white">
+              <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-medium">
                 <Sparkles className="size-3.5 text-primary" /> Cleaner. Healthier. Safer.
               </span>
             </Reveal>
             <Reveal delay={100}>
-              <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-white">
+              <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
                 Professional Cleaning &{" "}
                 <span className="text-gradient">Pest Control</span>{" "}
                 Solutions For Healthier Spaces
               </h1>
             </Reveal>
             <Reveal delay={200}>
-              <p className="mt-6 text-lg text-white/80 max-w-xl leading-relaxed">
+              <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
                 We help homes, offices, schools, hospitals and businesses maintain clean,
                 safe and pest-free environments through professional cleaning, fumigation,
                 mold remediation and environmental hygiene services.
@@ -122,7 +122,7 @@ function Home() {
                 </Link>
                 <Link
                   to="/contact"
-                  className="magnetic-btn inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white hover:bg-white/20 backdrop-blur"
+                  className="magnetic-btn inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3.5 text-sm font-semibold hover:border-primary"
                 >
                   Book Inspection
                 </Link>
@@ -132,15 +132,15 @@ function Home() {
               <div className="mt-10 grid grid-cols-3 max-w-md gap-6">
                 <div>
                   <div className="text-3xl font-bold text-gradient"><Counter to={1200} suffix="+" /></div>
-                  <div className="text-xs text-white/70 mt-1">Projects</div>
+                  <div className="text-xs text-muted-foreground mt-1">Projects</div>
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-gradient"><Counter to={98} suffix="%" /></div>
-                  <div className="text-xs text-white/70 mt-1">Satisfaction</div>
+                  <div className="text-xs text-muted-foreground mt-1">Satisfaction</div>
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-gradient"><Counter to={24} suffix="/7" /></div>
-                  <div className="text-xs text-white/70 mt-1">Support</div>
+                  <div className="text-xs text-muted-foreground mt-1">Support</div>
                 </div>
               </div>
             </Reveal>

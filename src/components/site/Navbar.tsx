@@ -30,7 +30,7 @@ export function Navbar() {
       <div className="container-x">
         <nav
           className={`flex items-center justify-between rounded-2xl px-4 md:px-6 py-3 transition-all duration-500 ${
-            scrolled ? "glass shadow-soft" : "bg-transparent"
+            scrolled ? "bg-transparent" : "bg-white shadow-soft"
           }`}
         >
           <Link to="/" className="flex items-center gap-2 group" aria-label="EcoShield home">

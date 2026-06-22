@@ -37,7 +37,7 @@ function Contact() {
           <img src={teamImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover opacity-30" />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
         </div>
-        <div className="container-x relative py-20 md:py-28 max-w-3xl">
+        <div className="container-x relative pt-28 md:pt-36 pb-20 md:pb-28 max-w-3xl">
           <Reveal>
             <p className="text-sm font-semibold text-primary uppercase tracking-wider">Contact us</p>
           </Reveal>

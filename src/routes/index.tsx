@@ -90,7 +90,7 @@ function Home() {
           <div className="absolute -top-32 -left-32 size-[480px] bg-primary/20 blur-3xl animate-blob" />
           <div className="absolute top-40 -right-32 size-[420px] bg-lime/30 blur-3xl animate-blob delay-300" />
         </div>
-        <div className="container-x pt-28 md:pt-36 pb-20 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="container-x pt-24 md:pt-32 pb-20 grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-medium">

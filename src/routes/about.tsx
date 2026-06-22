@@ -51,7 +51,7 @@ function About() {
           <img src={ecoImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover opacity-35" />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-transparent" />
         </div>
-        <div className="container-x relative pt-28 md:pt-36 pb-20 md:pb-28 max-w-3xl">
+        <div className="container-x relative pt-24 md:pt-32 pb-20 md:pb-28 max-w-3xl">
           <Reveal>
             <p className="text-sm font-semibold text-primary uppercase tracking-wider">About EcoShield</p>
           </Reveal>

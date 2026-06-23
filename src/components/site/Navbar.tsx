@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/ecoshield-logo.png.asset.json";
 
 const links = [
   { to: "/", label: "Home" },
@@ -23,16 +24,20 @@ export function Navbar() {
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled ? "py-2" : "py-3"
-      }`}
+        scrolled ? "py-2" : "py-4"
+      } bg-transparent`}
     >
       <div className="container-x">
         <nav
-          className="flex items-center justify-between px-4 md:px-6 py-3 transition-all duration-500 bg-white shadow-soft rounded-2xl"
+          className={`flex items-center justify-between px-4 md:px-6 py-3 transition-all duration-500 ${
+            scrolled
+              ? "glass shadow-soft rounded-2xl"
+              : "bg-transparent border-transparent shadow-none rounded-none"
+          }`}
         >
           <Link to="/" className="flex items-center gap-2 group" aria-label="EcoShield home">
             <img
-              src="/ecoshield-logo.png"
+              src={logo.url}
               alt="EcoShield Cleaning Services and Pest Control"
               className="h-10 md:h-11 w-auto object-contain transition-transform group-hover:scale-[1.03]"
               width={180}

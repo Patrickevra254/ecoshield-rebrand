@@ -12,7 +12,7 @@ export function Footer() {
             <img
               src={logo}
               alt="EcoShield Cleaning Services and Pest Control"
-              className="h-12 w-auto object-contain drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
+              className="h-16 w-auto object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
             />
           </Link>
           <p className="mt-4 text-sm text-white/70 leading-relaxed">

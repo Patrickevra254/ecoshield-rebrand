@@ -32,7 +32,7 @@ export function Navbar() {
         >
           <Link to="/" className="flex items-center gap-2 group" aria-label="EcoShield home">
             <img
-              src={logo.url}
+              src="/ecoshield-logo.png"
               alt="EcoShield Cleaning Services and Pest Control"
               className="h-10 md:h-11 w-auto object-contain transition-transform group-hover:scale-[1.03]"
               width={180}

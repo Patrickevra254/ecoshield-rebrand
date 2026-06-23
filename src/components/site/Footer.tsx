@@ -9,7 +9,7 @@ export function Footer() {
         <div className="md:col-span-2 max-w-md">
           <Link to="/" className="inline-flex items-center" aria-label="EcoShield home">
             <img
-              src={logo.url}
+              src="/ecoshield-logo.png"
               alt="EcoShield Cleaning Services and Pest Control"
               className="h-14 w-auto object-contain"
             />

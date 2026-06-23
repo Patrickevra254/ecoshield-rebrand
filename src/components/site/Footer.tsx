@@ -9,13 +9,11 @@ export function Footer() {
       <div className="container-x py-16 grid gap-12 md:grid-cols-4">
         <div className="md:col-span-2 max-w-md">
           <Link to="/" className="inline-flex items-center" aria-label="EcoShield home">
-            <span className="inline-block rounded-2xl bg-white p-3 shadow-soft">
-              <img
-                src={logo.url}
-                alt="EcoShield Cleaning Services and Pest Control"
-                className="h-12 w-auto object-contain"
-              />
-            </span>
+            <img
+              src={logo.url}
+              alt="EcoShield Cleaning Services and Pest Control"
+              className="h-14 w-auto object-contain"
+            />
           </Link>
           <p className="mt-4 text-sm text-white/70 leading-relaxed">
             Creating cleaner, healthier, and safer environments through professional

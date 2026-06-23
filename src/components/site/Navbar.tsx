@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/ecoshield-logo.png.asset.json";
+import logo from "@/assets/ecoshield-logo-transparent.png";
 
 const links = [
   { to: "/", label: "Home" },
@@ -37,7 +37,7 @@ export function Navbar() {
         >
           <Link to="/" className="flex items-center gap-2 group" aria-label="EcoShield home">
             <img
-              src={logo.url}
+              src={logo}
               alt="EcoShield Cleaning Services and Pest Control"
               className="h-10 md:h-11 w-auto object-contain transition-transform group-hover:scale-[1.03]"
               width={180}

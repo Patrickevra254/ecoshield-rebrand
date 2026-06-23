@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, MessageCircle } from "lucide-react";
-import logo from "@/assets/ecoshield-logo.png.asset.json";
 import { EMAIL, PHONE_DISPLAY, WHATSAPP_NUMBER } from "./FloatingActions";
 
 export function Footer() {

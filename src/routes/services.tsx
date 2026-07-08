@@ -71,45 +71,62 @@ function Services() {
 
       {/* DETAILED SERVICES */}
       <section className="container-x pb-12 space-y-20">
-        {services.map((s) => (
-          <Reveal key={s.slug}>
-            <article id={s.slug} className="scroll-mt-28 grid lg:grid-cols-[1fr_1.2fr] gap-10 items-start rounded-[2rem] border border-border bg-card p-7 md:p-10">
-              <div>
-                <div className="overflow-hidden rounded-2xl mb-6 aspect-[4/3] bg-secondary">
+        {services.map((s, idx) => {
+          const imageRight = idx % 2 === 1;
+          return (
+            <article
+              key={s.slug}
+              id={s.slug}
+              className={`scroll-mt-28 grid lg:grid-cols-2 gap-10 items-center rounded-[2rem] border border-border bg-card p-7 md:p-10`}
+            >
+              <Reveal
+                direction={imageRight ? "right" : "left"}
+                className={imageRight ? "lg:order-2" : "lg:order-1"}
+              >
+                <div className="overflow-hidden rounded-2xl aspect-[4/3] bg-secondary shadow-elegant hover-lift">
                   <img
                     src={s.image}
                     alt={`${s.title} in Nigeria`}
                     loading="lazy"
                     width={1200}
                     height={900}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                   />
                 </div>
-                <div className="grid place-items-center size-14 rounded-2xl bg-gradient-to-br from-primary to-primary-glow text-primary-foreground shadow-elegant">
-                  <s.icon className="size-7" />
-                </div>
-                <h2 className="mt-5 text-2xl md:text-3xl font-bold tracking-tight">{s.title}</h2>
-                <p className="mt-3 text-muted-foreground leading-relaxed">{s.description}</p>
-                <div className="mt-6">
-                  <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">Industries served</h3>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {s.industries.map((ind) => (
-                      <span key={ind} className="rounded-full bg-secondary text-secondary-foreground px-3 py-1 text-xs font-medium">{ind}</span>
-                    ))}
+              </Reveal>
+
+              <Reveal
+                direction={imageRight ? "left" : "right"}
+                delay={120}
+                className={imageRight ? "lg:order-1" : "lg:order-2"}
+              >
+                <div>
+                  <div className="grid place-items-center size-14 rounded-2xl bg-gradient-to-br from-primary to-primary-glow text-primary-foreground shadow-elegant">
+                    <s.icon className="size-7" />
                   </div>
+                  <h2 className="mt-5 text-2xl md:text-3xl font-bold tracking-tight">{s.title}</h2>
+                  <p className="mt-3 text-muted-foreground leading-relaxed">{s.description}</p>
+                  <div className="mt-6">
+                    <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">Industries served</h3>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {s.industries.map((ind) => (
+                        <span key={ind} className="rounded-full bg-secondary text-secondary-foreground px-3 py-1 text-xs font-medium">{ind}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="mt-6 grid sm:grid-cols-3 gap-3">
+                    <Block title="Benefits" items={s.benefits} />
+                    <Block title="Process" items={s.process} ordered />
+                    <Block title="Features" items={s.features} />
+                  </div>
+                  <Link to="/contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm font-semibold magnetic-btn">
+                    Request this service <ArrowRight className="size-4" />
+                  </Link>
                 </div>
-                <Link to="/contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm font-semibold magnetic-btn">
-                  Request this service <ArrowRight className="size-4" />
-                </Link>
-              </div>
-              <div className="grid sm:grid-cols-3 gap-4">
-                <Block title="Benefits" items={s.benefits} />
-                <Block title="Process" items={s.process} ordered />
-                <Block title="Features" items={s.features} />
-              </div>
+              </Reveal>
             </article>
-          </Reveal>
-        ))}
+          );
+        })}
       </section>
 
       {/* COMPARISON TABLE */}

@@ -12,6 +12,17 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+import residentialImg from "@/assets/services/residential.jpg";
+import commercialImg from "@/assets/services/commercial.jpg";
+import deepImg from "@/assets/services/deep.jpg";
+import janitorialImg from "@/assets/services/janitorial.jpg";
+import postConstructionImg from "@/assets/services/post-construction.jpg";
+import pestImg from "@/assets/services/pest.jpg";
+import fumigationImg from "@/assets/services/fumigation.jpg";
+import moldImg from "@/assets/services/mold.jpg";
+import floorImg from "@/assets/services/floor.jpg";
+import facadeImg from "@/assets/services/facade.jpg";
+
 export type Service = {
   slug: string;
   title: string;
@@ -22,6 +33,7 @@ export type Service = {
   process: string[];
   features: string[];
   industries: string[];
+  image: string;
 };
 
 export const services: Service[] = [

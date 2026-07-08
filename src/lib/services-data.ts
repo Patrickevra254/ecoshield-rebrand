@@ -39,6 +39,7 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "residential-cleaning",
+    image: residentialImg,
     title: "Residential Cleaning",
     icon: Home,
     short: "Spotless homes with eco-safe products that protect your family.",
@@ -51,6 +52,7 @@ export const services: Service[] = [
   },
   {
     slug: "commercial-cleaning",
+    image: commercialImg,
     title: "Commercial Cleaning",
     icon: Building2,
     short: "Reliable cleaning programs for offices, retail and corporate spaces.",
@@ -63,6 +65,7 @@ export const services: Service[] = [
   },
   {
     slug: "deep-cleaning",
+    image: deepImg,
     title: "Deep Cleaning",
     icon: Sparkles,
     short: "Restore tired spaces with intensive top-to-bottom deep cleans.",
@@ -75,6 +78,7 @@ export const services: Service[] = [
   },
   {
     slug: "janitorial",
+    image: janitorialImg,
     title: "Janitorial Services",
     icon: Brush,
     short: "Daily and recurring janitorial support tailored to your facility.",
@@ -87,6 +91,7 @@ export const services: Service[] = [
   },
   {
     slug: "post-construction",
+    image: postConstructionImg,
     title: "Post-Construction Cleaning",
     icon: Hammer,
     short: "Hand over a polished, dust-free site ready for occupancy.",
@@ -99,6 +104,7 @@ export const services: Service[] = [
   },
   {
     slug: "pest-control",
+    image: pestImg,
     title: "Pest Control",
     icon: Bug,
     short: "Integrated pest management for lasting protection.",
@@ -111,6 +117,7 @@ export const services: Service[] = [
   },
   {
     slug: "fumigation",
+    image: fumigationImg,
     title: "Fumigation",
     icon: Wind,
     short: "Whole-space fumigation that eliminates infestations safely.",
@@ -123,6 +130,7 @@ export const services: Service[] = [
   },
   {
     slug: "mold-remediation",
+    image: moldImg,
     title: "Mold Inspection & Remediation",
     icon: Droplets,
     short: "Detect, contain and remove mold to protect your indoor air.",
@@ -135,6 +143,7 @@ export const services: Service[] = [
   },
   {
     slug: "floor-restoration",
+    image: floorImg,
     title: "Floor Restoration",
     icon: Layers,
     short: "Revive marble, terrazzo, wood and concrete floors to a like-new finish.",
@@ -147,6 +156,7 @@ export const services: Service[] = [
   },
   {
     slug: "facade-cleaning",
+    image: facadeImg,
     title: "Facade Cleaning",
     icon: Sun,
     short: "High-rise facade and glass cleaning by certified professionals.",

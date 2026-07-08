@@ -196,9 +196,9 @@ function About() {
             ))}
           </ul>
         </div>
-        <Reveal>
-          <div className="overflow-hidden rounded-[2rem] shadow-elegant">
-            <img src={ecoImg} alt="Eco-friendly hygiene visuals" width={1200} height={1200} loading="lazy" className="w-full h-auto" />
+        <Reveal direction="right">
+          <div className="overflow-hidden rounded-[2rem] shadow-elegant hover-lift">
+            <img src={ecoImg} alt="Eco-friendly hygiene visuals" width={1200} height={1200} loading="lazy" className="w-full h-auto transition-transform duration-700 hover:scale-105" />
           </div>
         </Reveal>
       </section>

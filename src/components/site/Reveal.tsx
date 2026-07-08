@@ -1,15 +1,19 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
+type Direction = "up" | "left" | "right" | "zoom" | "fade";
+
 export function Reveal({
   children,
   delay = 0,
   className = "",
   as: Tag = "div",
+  direction = "up",
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
   as?: keyof React.JSX.IntrinsicElements;
+  direction?: Direction;
 }) {
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
@@ -26,19 +30,27 @@ export function Reveal({
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
     );
     io.observe(el);
     return () => io.disconnect();
   }, []);
+
+  const hidden: Record<Direction, string> = {
+    up: "opacity-0 translate-y-8",
+    left: "opacity-0 -translate-x-10",
+    right: "opacity-0 translate-x-10",
+    zoom: "opacity-0 scale-95",
+    fade: "opacity-0",
+  };
 
   const Comp = Tag as any;
   return (
     <Comp
       ref={ref as any}
       style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-700 ease-out ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      className={`transition-all duration-700 ease-out will-change-transform ${
+        visible ? "opacity-100 translate-x-0 translate-y-0 scale-100" : hidden[direction]
       } ${className}`}
     >
       {children}

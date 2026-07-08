@@ -71,10 +71,20 @@ function Services() {
 
       {/* DETAILED SERVICES */}
       <section className="container-x pb-12 space-y-20">
-        {services.map((s, i) => (
+        {services.map((s) => (
           <Reveal key={s.slug}>
             <article id={s.slug} className="scroll-mt-28 grid lg:grid-cols-[1fr_1.2fr] gap-10 items-start rounded-[2rem] border border-border bg-card p-7 md:p-10">
               <div>
+                <div className="overflow-hidden rounded-2xl mb-6 aspect-[4/3] bg-secondary">
+                  <img
+                    src={s.image}
+                    alt={`${s.title} in Nigeria`}
+                    loading="lazy"
+                    width={1200}
+                    height={900}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <div className="grid place-items-center size-14 rounded-2xl bg-gradient-to-br from-primary to-primary-glow text-primary-foreground shadow-elegant">
                   <s.icon className="size-7" />
                 </div>

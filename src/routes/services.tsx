@@ -2,8 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
+import { HeroSlideshow } from "@/components/site/HeroSlideshow";
 import { services } from "@/lib/services-data";
 import pestImg from "@/assets/pest.jpg";
+import commercialImg from "@/assets/services/commercial.jpg";
+import facadeImg from "@/assets/services/facade.jpg";
+import deepImg from "@/assets/services/deep.jpg";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -27,11 +31,13 @@ function Services() {
   return (
     <SiteLayout>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-hero">
-        <div className="absolute inset-y-0 right-0 hidden lg:block w-1/2 pointer-events-none">
-          <img src={pestImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover opacity-35" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-transparent" />
-        </div>
+      <section className="relative overflow-hidden bg-hero min-h-[70vh] flex items-center">
+        <HeroSlideshow
+          images={[commercialImg, facadeImg, deepImg, pestImg]}
+          opacity={0.9}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent pointer-events-none" />
         <div className="container-x relative pt-24 md:pt-32 pb-20 md:pb-28 max-w-3xl">
           <Reveal>
             <p className="text-sm font-semibold text-primary uppercase tracking-wider">Our services</p>

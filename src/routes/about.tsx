@@ -2,8 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, Target, Eye, Heart } from "lucide-react";
 import { SiteLayout } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
+import { HeroSlideshow } from "@/components/site/HeroSlideshow";
 import teamImg from "@/assets/team.jpg";
 import ecoImg from "@/assets/eco.jpg";
+import heroImg from "@/assets/hero.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -46,11 +48,13 @@ function About() {
   return (
     <SiteLayout>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-hero">
-        <div className="absolute inset-y-0 right-0 hidden lg:block w-1/2 pointer-events-none">
-          <img src={ecoImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover opacity-35" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-transparent" />
-        </div>
+      <section className="relative overflow-hidden bg-hero min-h-[70vh] flex items-center">
+        <HeroSlideshow
+          images={[teamImg, heroImg, ecoImg]}
+          opacity={0.9}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent pointer-events-none" />
         <div className="container-x relative pt-24 md:pt-32 pb-20 md:pb-28 max-w-3xl">
           <Reveal>
             <p className="text-sm font-semibold text-primary uppercase tracking-wider">About EcoShield</p>

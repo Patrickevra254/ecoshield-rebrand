@@ -7,6 +7,9 @@ import { services } from "@/lib/services-data";
 import { EMAIL, PHONE_DISPLAY, WHATSAPP_NUMBER } from "@/components/site/FloatingActions";
 import { openExternal, handleExternalClick } from "@/lib/open-external";
 import teamImg from "@/assets/team.jpg";
+import heroImg from "@/assets/hero.jpg";
+import commercialImg from "@/assets/services/commercial.jpg";
+import { HeroSlideshow } from "@/components/site/HeroSlideshow";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -32,11 +35,13 @@ function Contact() {
   return (
     <SiteLayout>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-hero">
-        <div className="absolute inset-y-0 right-0 hidden lg:block w-1/2 pointer-events-none">
-          <img src={teamImg} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover opacity-30" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
-        </div>
+      <section className="relative overflow-hidden bg-hero min-h-[70vh] flex items-center">
+        <HeroSlideshow
+          images={[teamImg, commercialImg, heroImg]}
+          opacity={0.9}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent pointer-events-none" />
         <div className="container-x relative pt-24 md:pt-32 pb-20 md:pb-28 max-w-3xl">
           <Reveal>
             <p className="text-sm font-semibold text-primary uppercase tracking-wider">Contact us</p>

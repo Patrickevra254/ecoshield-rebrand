@@ -36,9 +36,9 @@ function Services() {
           images={[commercialImg, facadeImg, deepImg, pestImg]}
           opacity={1}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 via-55% to-transparent to-80% pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent pointer-events-none" />
-        <div className="container-x relative mr-auto pt-24 md:pt-32 pb-20 md:pb-28 max-w-3xl lg:max-w-[48%]">
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 via-40% to-transparent to-70% pointer-events-none" />
+        <div className="container-x relative z-10 w-full pt-24 md:pt-32 pb-20 md:pb-28">
+          <div className="max-w-xl lg:max-w-[48%]">
           <Reveal>
             <p className="text-sm font-semibold text-primary uppercase tracking-wider">Our services</p>
           </Reveal>
@@ -53,6 +53,7 @@ function Services() {
               we deliver the full spectrum of environmental hygiene services.
             </p>
           </Reveal>
+          </div>
         </div>
       </section>
 

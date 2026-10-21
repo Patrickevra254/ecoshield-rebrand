@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 
 /**
  * Cross-fading hero background slideshow.
@@ -9,11 +9,13 @@ export function HeroSlideshow({
   interval = 4500,
   className = "",
   opacity = 0.55,
+  mobileOpacity = 0.3,
 }: {
   images: string[];
   interval?: number;
   className?: string;
   opacity?: number;
+  mobileOpacity?: number;
 }) {
   const [index, setIndex] = useState(0);
 
@@ -32,8 +34,11 @@ export function HeroSlideshow({
           key={src}
           src={src}
           alt=""
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[1600ms] ease-in-out"
-          style={{ opacity: i === index ? opacity : 0 }}
+          className="hero-slideshow-image absolute inset-0 w-full h-full object-cover transition-opacity duration-[1600ms] ease-in-out"
+          style={{
+            "--hero-image-opacity": i === index ? opacity : 0,
+            "--hero-image-mobile-opacity": i === index ? mobileOpacity : 0,
+          } as CSSProperties}
         />
       ))}
     </div>

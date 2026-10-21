@@ -155,6 +155,16 @@
   background-image: var(--gradient-hero);
 }
 
+.hero-slideshow-image {
+  opacity: var(--hero-image-opacity, 1);
+}
+
+@media (max-width: 767px) {
+  .hero-slideshow-image {
+    opacity: var(--hero-image-mobile-opacity, var(--hero-image-opacity, 1));
+  }
+}
+
 @utility bg-dark {
   background: var(--gradient-dark);
   color: var(--charcoal-foreground);

@@ -1,0 +1,1 @@
+- [ ] Dim About, Services, and Contact hero photos on mobile to improve text readability.
